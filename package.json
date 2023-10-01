@@ -1,7 +1,7 @@
 {
   "name": "@kiserit/fuset",
   "version": "0.0.2",
-  "description": "Express middleware to combine assets",
+  "description": "Web server middleware to combine assets",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -23,6 +23,7 @@
     "combine javascript",
     "combine css",
     "express",
+    "fastify",
     "middleware"
   ],
   "author": "Kiser IT",
