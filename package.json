@@ -1,6 +1,6 @@
 {
   "name": "@kiserit/fuset",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Web server middleware to combine assets",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -29,10 +29,10 @@
   "author": "Kiser IT",
   "license": "MIT",
   "repository": "github:kiserit/fuset",
-  "homepage": "https://github.com/kiserit/fuset",  
+  "homepage": "https://github.com/kiserit/fuset",
   "bugs": {
     "url": "https://github.com/kiserit/fuset/issues"
-  },    
+  },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
     "@types/mime": "^3.0.2",
