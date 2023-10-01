@@ -1,2 +1,2 @@
 # fuset
-Express middleware to dynamically combine assets
+Web server middleware to dynamically combine assets
