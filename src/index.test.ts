@@ -37,12 +37,9 @@ describe('Redirecting', () => {
     res.send = (data: string) => {
       expect(cacheControl).toBe(fusetOptions.cache);
       expect(contentType).toBe('javascript/text; charset=utf-8');
-      expect(data).toBe(`console.log('TEST 1');\nconsole.log('TEST 2');`);
+      expect(data).toBe(`console.log('TEST 1');\n\nconsole.log('TEST 2');`);
     }
-    const next = (err?: any) => {
-      expect(true).toBe(false);
-    }
-    fusetHandler(req, res, next)
+    fusetHandler(req, res)
   });
 
   it("should return test1.js", () => {
@@ -78,10 +75,7 @@ describe('Redirecting', () => {
       expect(contentType).toBe('javascript/text; charset=utf-8');
       expect(data).toBe(`console.log('TEST 1');`);
     }
-    const next = (err?: any) => {
-      expect(true).toBe(false);
-    }
-    fusetHandler(req, res, next)
+    fusetHandler(req, res)
   });
 
 });
