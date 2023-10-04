@@ -5,8 +5,8 @@ import mime from 'mime';
 const DEFAULT_ENCODING = 'utf-8';
 
 
-interface FusetNext {
-  (err?: any): void;
+interface FusetMinifier {
+  (content: string): string;
 }
 
 interface FusetOptions {
@@ -14,6 +14,7 @@ interface FusetOptions {
   files?: string[],
   cache?: string,
   mime?: string,
+  minifier?: FusetMinifier,
 }
 
 
@@ -23,12 +24,12 @@ interface FusetRequest {
   path: string,
 }
 
+
 interface FusetResponse {
   statusCode: number,
   header: { (name: string, value: string): void },
   send: { (data: string|number|boolean|object|Buffer): void },
 }
-
 
 
 function getFileList(path?: string, files?: string[]) {
@@ -66,6 +67,9 @@ function combineFileContents(files: string[], delimiter?: string): string {
 }
 
 
+function defaultMinifier(content: string) : string {
+  return content;
+}
 
 
 function fuset(options: FusetOptions) {
@@ -74,10 +78,11 @@ function fuset(options: FusetOptions) {
 
   const optCache = options.cache;
   const optMime = options.mime;
+  const optMinifier = typeof options.minifier === 'function' ? options.minifier : defaultMinifier;
   const fileList = getFileList(options.path, options.files);
-  const content = combineFileContents(fileList, '\n');
+  const content = optMinifier(combineFileContents(fileList));
 
-  const fusetHandler = (req: FusetRequest, res: FusetResponse, next: FusetNext) => {
+  const fusetHandler = (req: FusetRequest, res: FusetResponse) => {
     if (optCache) res.header('Cache-Control', optCache);
     if (optMime) {
       res.header('Content-Type', `${optMime}; charset=${DEFAULT_ENCODING}`);
